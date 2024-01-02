@@ -1,0 +1,29 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"  # Map the frontend port to host
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=production  # Set production environment
+    networks:
+      - prod-network 
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "3001:3001"  # Map the backend port to host
+    environment:
+      - NODE_ENV=production  # Set production environment
+    networks:
+      - prod-network
+
+networks:
+  prod-network:
+    driver: bridge
