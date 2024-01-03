@@ -11,7 +11,12 @@ services:
     environment:
       - NODE_ENV=production  # Set production environment
     networks:
-      - prod-network 
+      - prod-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
 
   backend:
     build:
@@ -23,6 +28,11 @@ services:
       - NODE_ENV=production  # Set production environment
     networks:
       - prod-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
 
 networks:
   prod-network:

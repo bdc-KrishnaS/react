@@ -10,13 +10,9 @@ COPY frontend/package*.json ./
 RUN mkdir -p node_modules && chown -R node:node node_modules
 
 # Install dependencies and cleanup
-RUN npm install && npm cache clean 
+RUN npm install && npm cache clean --force
 
 COPY frontend/. .
-
-# Uncomment the lines below if you need to rename a file
-# RUN mv /usr/src/app/src/index.js /usr/src/app/src/index.mjs
-# RUN node /usr/src/app/src/index.mjs
 
 # Expose the application port
 EXPOSE 3000
