@@ -1,0 +1,19 @@
+FROM node:lts-alpine
+
+WORKDIR /usr/src/app
+
+USER root
+
+COPY backend/package*.json ./
+
+RUN mkdir -p node_modules && chown -R node:node node_modules
+
+RUN npm install --production && npm cache clean --force
+
+COPY /backend/. .
+
+EXPOSE 3001
+
+USER node
+
+CMD [ "node", "./server.js" ]
