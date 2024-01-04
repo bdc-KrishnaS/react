@@ -1,39 +1,38 @@
-version: '3'
+version: '3.9'
 services:
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend
+    image: krishna1386/multiflaskapp:frontend
+    # pull: always
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.frontend
     ports:
       - "3000:3000"  # Map the frontend port to host
     depends_on:
       - backend
     environment:
       - NODE_ENV=production  # Set production environment
-    networks:
-      - prod-network
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
+
 
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
+    image: krishna1386/multiflaskapp:main
+    # pull: always
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.backend
     ports:
       - "3001:3001"  # Map the backend port to host
     environment:
       - NODE_ENV=production  # Set production environment
-    networks:
-      - prod-network
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 512M
-
-networks:
-  prod-network:
-    driver: bridge
