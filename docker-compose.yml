@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   frontend:
-    image: krishna1386/multiflaskapp:frontend
+    image: krishna1386/react:frontend
     # pull: always
     deploy:
       replicas: 1
@@ -21,7 +21,7 @@ services:
 
 
   backend:
-    image: krishna1386/multiflaskapp:main
+    image: krishna1386/react:backend
     # pull: always
     deploy:
       replicas: 1
